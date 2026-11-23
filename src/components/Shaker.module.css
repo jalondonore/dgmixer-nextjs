@@ -1,0 +1,89 @@
+.shakerLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.shakerBottleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: -4%;
+}
+
+.shakerBottleInner {
+  width: clamp(80px, 9vw, 140px);
+}
+
+.shakerImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.meter {
+  width: clamp(130px, 16vw, 220px);
+  height: 14px;
+  padding: 8px;
+  border-radius: 25px;
+  background: var(--teal-mid);
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.meterFill {
+  display: block;
+  height: 100%;
+  border-radius: 20px;
+  background-color: var(--teal);
+  background-image: linear-gradient(var(--teal), var(--teal-deep));
+  box-shadow:
+    inset 0 2px 9px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.meterFill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.25) 0 8px,
+    transparent 8px 16px
+  );
+  animation: meterStripes 1s linear infinite;
+}
+
+@keyframes meterStripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32px 0;
+  }
+}
+
+.successWrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2%;
+}
+
+.successImage {
+  width: clamp(120px, 18vw, 220px);
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meterFill::after {
+    animation: none;
+  }
+}

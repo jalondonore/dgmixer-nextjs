@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
+import styles from "./Shaker.module.css";
 
 type Stage = "hidden" | "delay" | "enter" | "shake" | "exit" | "success";
 
@@ -59,16 +60,18 @@ export function Shaker({ active, runKey, onComplete }: ShakerProps) {
     stage === "enter" || stage === "shake" || stage === "exit";
 
   return (
-    <div className="shakerLayer" aria-hidden="true">
+    <div className={styles.shakerLayer} aria-hidden="true">
       {bottleVisible && (
         <motion.div
-          className="shakerBottleWrap"
+          className={styles.shakerBottleWrap}
           variants={wrapVariants}
           initial="hidden"
-          animate={stage === "exit" ? "exit" : stage === "shake" ? "shake" : "enter"}
+          animate={
+            stage === "exit" ? "exit" : stage === "shake" ? "shake" : "enter"
+          }
         >
           <motion.div
-            className="shakerBottleInner"
+            className={styles.shakerBottleInner}
             animate={
               stage === "shake"
                 ? { rotate: [-8, 8, -8, 8, -8, 8, 0] }
@@ -85,14 +88,14 @@ export function Shaker({ active, runKey, onComplete }: ShakerProps) {
               alt=""
               width={676}
               height={644}
-              className="shakerImage"
+              className={styles.shakerImage}
               priority
             />
           </motion.div>
 
-          <div className="meter">
+          <div className={styles.meter}>
             <motion.span
-              className="meterFill"
+              className={styles.meterFill}
               initial={false}
               animate={{ width: stage === "shake" ? "100%" : "0%" }}
               transition={
@@ -107,7 +110,7 @@ export function Shaker({ active, runKey, onComplete }: ShakerProps) {
 
       {stage === "success" && (
         <motion.div
-          className="successWrap"
+          className={styles.successWrap}
           initial={{ opacity: 0, scale: 0.4, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 14 }}
@@ -117,7 +120,7 @@ export function Shaker({ active, runKey, onComplete }: ShakerProps) {
             alt=""
             width={257}
             height={218}
-            className="successImage"
+            className={styles.successImage}
             priority
           />
         </motion.div>

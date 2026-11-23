@@ -1,0 +1,54 @@
+.drugSelect {
+  width: min(190px, 42vw);
+  height: 40px;
+  padding: 0 32px 0 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: var(--font-nexa), sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"),
+    url("/images/select-bg.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position:
+    right 10px center,
+    center;
+  background-size:
+    18px,
+    100% 100%;
+  transition:
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+.drugSelect:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.drugSelect:disabled {
+  cursor: progress;
+  opacity: 0.55;
+}
+
+.drugSelect option {
+  background-color: var(--option-bg);
+  color: var(--teal-dark);
+  font-family: var(--font-nexa), sans-serif;
+  text-align: center;
+}
+
+.drugSelect option:disabled {
+  color: #4c6364;
+  opacity: 0.55;
+}
+
+.drugSelect:focus-visible {
+  outline: 2px solid var(--teal-deep);
+  outline-offset: 3px;
+}

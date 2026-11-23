@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import { Mulish } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
 const nexa = localFont({
   src: "./fonts/nexa-black.otf",
   variable: "--font-nexa",
+  display: "swap",
+});
+
+const mulish = Mulish({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -20,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={nexa.variable}>
+    <html lang="en" className={`${nexa.variable} ${mulish.variable}`}>
       <body>
         <main className="page">{children}</main>
       </body>

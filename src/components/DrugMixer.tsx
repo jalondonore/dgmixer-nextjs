@@ -10,6 +10,7 @@ import { ReturnButton } from "@/components/ReturnButton";
 import { Shaker } from "@/components/Shaker";
 import { getInteraction } from "@/content/interactions";
 import type { DrugId } from "@/types";
+import styles from "./DrugMixer.module.css";
 
 type Phase = "idle" | "mixing" | "result";
 
@@ -59,22 +60,25 @@ export default function DrugMixer() {
 
   return (
     <>
-      <section className="mixer">
-        <header className="mixerHeader">
+      <section>
+        <header className={styles.mixerHeader}>
           <Image
             src="/images/logo.png"
             alt="Drug Interaction Tool"
             width={1804}
             height={868}
-            className="logo"
+            className={styles.logo}
             priority
           />
-          <h1 className="logotitle">What happens when you mix...</h1>
+          <h1 className={styles.logotitle}>What happens when you mix...</h1>
         </header>
 
-        <form className="mixerForm" onSubmit={(event) => event.preventDefault()}>
-          <div className="field">
-            <label className="srOnly" htmlFor="drug-left">
+        <form
+          className={styles.mixerForm}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <div className={styles.field}>
+            <label className={styles.srOnly} htmlFor="drug-left">
               First drug
             </label>
             <DrugSelect
@@ -86,8 +90,8 @@ export default function DrugMixer() {
             />
           </div>
 
-          <div className="field">
-            <label className="srOnly" htmlFor="drug-right">
+          <div className={styles.field}>
+            <label className={styles.srOnly} htmlFor="drug-right">
               Second drug
             </label>
             <DrugSelect
@@ -110,7 +114,7 @@ export default function DrugMixer() {
           {showStage && (
             <motion.div
               key="stage"
-              className="stage"
+              className={styles.stage}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

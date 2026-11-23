@@ -1,4 +1,5 @@
 import type { Interaction } from "@/types";
+import styles from "./InteractionArticle.module.css";
 
 interface InteractionArticleProps {
   interaction: Interaction;
@@ -6,24 +7,24 @@ interface InteractionArticleProps {
 
 export function InteractionArticle({ interaction }: InteractionArticleProps) {
   return (
-    <article id="interaction-article" className="articleContainer">
-      <div className="articleCard">
-        <h1 id="interaction-title" className="ditTitle">
+    <article id="interaction-article" className={styles.articleContainer}>
+      <div className={styles.articleCard}>
+        <h2 id="interaction-title" className={styles.ditTitle}>
           {interaction.title}
-        </h1>
+        </h2>
 
-        <p className="ditText">{interaction.intro}</p>
+        <p className={styles.ditText}>{interaction.intro}</p>
 
-        <ul className="ditList">
+        <ul className={styles.ditList}>
           {interaction.bullets.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
 
-        <h2 className="ditHeading">{interaction.interactionHeading}</h2>
-        <p className="ditText">{interaction.interactionBody}</p>
+        <h3 className={styles.ditHeading}>{interaction.interactionHeading}</h3>
+        <p className={styles.ditText}>{interaction.interactionBody}</p>
 
-        <div className="videoWrap">
+        <div className={styles.videoWrap}>
           <iframe
             src={interaction.video.src}
             title={interaction.video.title}
@@ -34,8 +35,8 @@ export function InteractionArticle({ interaction }: InteractionArticleProps) {
           />
         </div>
 
-        <h2 className="ditHeading">{interaction.statisticsHeading}</h2>
-        <p className="ditText">{interaction.statisticsBody}</p>
+        <h3 className={styles.ditHeading}>{interaction.statisticsHeading}</h3>
+        <p className={styles.ditText}>{interaction.statisticsBody}</p>
       </div>
     </article>
   );

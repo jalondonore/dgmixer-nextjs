@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import styles from "./ReturnButton.module.css";
 
 interface ReturnButtonProps {
   onClick: () => void;
@@ -9,10 +10,10 @@ interface ReturnButtonProps {
 
 export function ReturnButton({ onClick }: ReturnButtonProps) {
   return (
-    <div className="returnWrap">
+    <div className={styles.returnWrap}>
       <motion.button
         type="button"
-        className="returnButton"
+        className={styles.returnButton}
         onClick={onClick}
         aria-label="Return to the beginning"
         whileHover={{ rotate: -360 }}
@@ -23,10 +24,10 @@ export function ReturnButton({ onClick }: ReturnButtonProps) {
           alt=""
           width={201}
           height={201}
-          className="returnImage"
+          className={styles.returnImage}
         />
       </motion.button>
-      <p className="returnLabel">
+      <p className={styles.returnLabel}>
         <i>RETURN</i>
       </p>
     </div>

@@ -2,6 +2,7 @@
 
 import { DRUGS, DRUG_ORDER, isDrugId } from "@/content/drugs";
 import type { DrugId } from "@/types";
+import styles from "./DrugSelect.module.css";
 
 interface DrugSelectProps {
   id: string;
@@ -23,7 +24,7 @@ export function DrugSelect({
   return (
     <select
       id={id}
-      className="drugSelect"
+      className={styles.drugSelect}
       value={value ?? ""}
       disabled={disabled}
       onChange={(event) => {

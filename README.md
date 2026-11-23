@@ -36,12 +36,16 @@ Open http://localhost:3000.
 
 ### Scripts
 
-| Command             | Description                      |
-| ------------------- | -------------------------------- |
-| `npm run dev`       | Start the development server     |
-| `npm run build`     | Create a production build        |
-| `npm run start`     | Run the production build         |
-| `npm run typecheck` | Type-check the project with `tsc` |
+| Command                | Description                       |
+| ---------------------- | --------------------------------- |
+| `npm run dev`          | Start the development server      |
+| `npm run build`        | Create a production build         |
+| `npm run start`        | Run the production build          |
+| `npm run lint`         | Lint the project with ESLint      |
+| `npm run lint:fix`     | Lint and auto-fix issues          |
+| `npm run format`       | Format the project with Prettier  |
+| `npm run format:check` | Check formatting without writing  |
+| `npm run typecheck`    | Type-check the project with `tsc` |
 
 ## Project structure
 
@@ -49,11 +53,13 @@ Open http://localhost:3000.
 src/
 ├── app/                 # App Router entry points, layout and global styles
 │   ├── fonts/           # Local font files
-│   ├── globals.css
+│   ├── globals.css      # Design tokens, reset and base styles
 │   ├── layout.tsx
 │   └── page.tsx
-├── components/          # UI components (mixer, selects, shaker, article)
-├── content/             # Typed content: drugs and interaction articles
+├── components/          # UI components + colocated CSS Modules
+├── content/
+│   ├── drugs.ts         # Substance metadata and ordering
+│   └── interactions/    # One typed file per drug pair + shared helpers
 └── types.ts             # Shared TypeScript types
 public/images/           # Static images (drugs, logo, shaker, success)
 ```
@@ -61,8 +67,10 @@ public/images/           # Static images (drugs, logo, shaker, success)
 ### Adding a new interaction
 
 1. Add the substance to `DRUG_ORDER` and `DRUGS` in `src/content/drugs.ts`.
-2. Add its pairing definition to `DEFINITIONS` in `src/content/interactions.ts`.
-3. Place the artwork in `public/images/drugs/`.
+2. Create a new file in `src/content/interactions/` (for example
+   `alcohol-cocaine.ts`) exporting an `InteractionDefinition`.
+3. Register it in `src/content/interactions/index.ts`.
+4. Place the artwork in `public/images/drugs/`.
 
 The pair lookup (`getInteraction`) is order-independent, so `alcohol|cocaine` and `cocaine|alcohol` resolve to the same article.
 

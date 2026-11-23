@@ -1,0 +1,38 @@
+.handSlot {
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 42%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.handSlotLeft {
+  left: 0;
+}
+
+.handSlotRight {
+  right: 0;
+}
+
+.handSlide {
+  position: absolute;
+  inset: 0;
+}
+
+.handImage {
+  object-fit: contain;
+  object-position: left center;
+  user-select: none;
+}
+
+.handImageMirror {
+  transform: scaleX(-1);
+}
+
+@media (min-width: 768px) {
+  .handSlot {
+    display: block;
+  }
+}
