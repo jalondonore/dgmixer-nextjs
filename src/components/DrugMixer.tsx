@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DrugSelect } from "@/components/DrugSelect";
 import { HandsStage } from "@/components/HandsStage";
 import { InteractionArticle } from "@/components/InteractionArticle";
@@ -22,7 +22,7 @@ export default function DrugMixer() {
 
   const interaction =
     left && right && left !== right ? getInteraction(left, right) : null;
-  const showStage = Boolean(left || right) && phase !== "result";
+  const showStage = Boolean(left || right);
 
   const scrollToTitle = useCallback(() => {
     const title = document.getElementById("interaction-title");
@@ -30,6 +30,16 @@ export default function DrugMixer() {
       title.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, []);
+
+  useEffect(() => {
+    if (phase !== "result") {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => scrollToTitle());
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [phase, scrollToTitle]);
 
   const handleMixComplete = useCallback(() => setPhase("result"), []);
 
@@ -104,13 +114,7 @@ export default function DrugMixer() {
           </div>
         </form>
 
-        <AnimatePresence
-          onExitComplete={() => {
-            if (phase === "result") {
-              window.requestAnimationFrame(() => scrollToTitle());
-            }
-          }}
-        >
+        <AnimatePresence>
           {showStage && (
             <motion.div
               key="stage"
@@ -120,7 +124,7 @@ export default function DrugMixer() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <HandsStage key={runId} left={left} right={right} />
+              <HandsStage left={left} right={right} />
               <Shaker
                 runKey={runId}
                 active={phase === "mixing"}
@@ -135,8 +139,8 @@ export default function DrugMixer() {
         {phase === "result" && interaction && (
           <motion.div
             key="result"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
