@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { DRUGS } from "@/content/drugs";
+import { motion } from "framer-motion";
+import { DRUGS, DRUG_ORDER } from "@/content/drugs";
 import type { DrugId } from "@/types";
 import styles from "./HandsStage.module.css";
 
@@ -21,18 +21,25 @@ function Hand({ drug, side }: HandProps) {
       }`}
       aria-hidden="true"
     >
-      <AnimatePresence>
-        {drug && (
+      {DRUG_ORDER.map((drugId) => {
+        const selected = drug === drugId;
+
+        return (
           <motion.div
-            key={drug}
+            key={drugId}
             className={styles.handSlide}
-            initial={{ x: `${direction * 100}%`, opacity: 0.4 }}
-            animate={{ x: "0%", opacity: 1 }}
-            exit={{ x: `${direction * 100}%`, opacity: 0 }}
+            style={{ zIndex: selected ? 1 : 0 }}
+            initial={
+              selected ? { x: `${direction * 100}%`, opacity: 0.4 } : false
+            }
+            animate={{
+              x: selected ? "0%" : `${direction * 100}%`,
+              opacity: selected ? 1 : 0,
+            }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <Image
-              src={DRUGS[drug].image}
+              src={DRUGS[drugId].image}
               alt=""
               fill
               sizes="(max-width: 767px) 0px, 42vw"
@@ -41,11 +48,12 @@ function Hand({ drug, side }: HandProps) {
                   ? `${styles.handImage} ${styles.handImageMirror}`
                   : styles.handImage
               }
-              priority
+              loading="eager"
+              unoptimized
             />
           </motion.div>
-        )}
-      </AnimatePresence>
+        );
+      })}
     </div>
   );
 }
