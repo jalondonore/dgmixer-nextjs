@@ -6,7 +6,6 @@ Originally built as a static site to support a rehab clinic's prevention program
 
 ## Demo
 
-- Live demo: _add your Vercel URL here_
 - Original static version: https://jalondonore.github.io/dgmixer/
 
 ## Features
